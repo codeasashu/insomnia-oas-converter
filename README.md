@@ -1,99 +1,86 @@
-# TSDX User Guide
+# Insomnia Openapi Converter
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+This project converts [insomnia](https://insomnia.rest/) to openapi specification (3.0.0).
+This package is an effort of improving the another package [Swaggymnia](https://github.com/mlabouardy/swaggymnia) 
 
-> This TSDX setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+so that I can use couple of extra features such as:
+- Insomnia templates in path (`{{ }}` syntax in urls)
+- Proper URL formatting and splitting query strings
+- Supporting `oneOf`
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
+[Insomnia](https://insomnia.rest/) being built on top of javascript framework, 
+it is nice to have the converter in Javascript itself (you can use this as a plugin)
 
-## Commands
+## Quickstart
 
-TSDX scaffolds your new library inside `/src`.
+Install this project using npm
 
-To run TSDX, use:
-
-```bash
-npm start # or yarn start
+```
+npm i insomnia-openapi-converter
 ```
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
-
-To do a one-off build, use `npm run build` or `yarn build`.
-
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
-```
-
-### Rollup
-
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
-
-### TypeScript
-
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
-
-## Continuous Integration
-
-### GitHub Actions
-
-A simple action is included that runs these steps on all pushes:
-
-- Installs deps w/ cache
-- Lints, tests, and builds
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
+Once installed, you can access to converter in your javascript
 
 ```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
+var converter = require('insomnia-openapi-converter');
 
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
+// Your openapi spec config
+let openapiConfig = {
+    "title": "My Api",
+    "description": "A Very cool api",
+    "version": "1.0.0",
+    "baseUrl": "http://example.tld"
+};
+
+// Read insomnia exported (in v4 format) json file into a dict
+let insomniaExportedInput = {
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2020-09-03T15:26:50.615Z",
+    "__export_source": "insomnia.desktop.app:v2020.4.0-beta.4",
+    "resources": [
+      ...
+    ]
 }
+
+let schema = new converter.SchemaPack(insomniaExportedInput, openapiConfig)
+let spec = schema.convert();
+
+// Convert to yaml
+let spec_in_yaml = spec.as_yaml()
+
+// Convert to json
+let spec_in_yaml = spec.as_json()
+
+// Or you can simply get the spec is javascript object
+let spec_dict = spec.as_dict()
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+## SchemaPack
 
-## Module Formats
+SchemaPack is responsible for handling the insomnia input and perform some
+validations on it. It also exposes a `convert` method, after the validations
+has ran.
 
-CJS, ESModules, and UMD module formats are supported.
+### convert
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
+`convert` gives you a instance of `SpecExporter` which allows you to export the
+specification as yaml, json or plain javascript object.
 
-## Named Exports
+## SpecExporter
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+SpecExporter implements the yaml package to output the converted openapi spec
+to yaml. It natively supports json and dict.
 
-## Including Styles
+## Testing
 
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
+TODO
 
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
+## Author
 
-## Publishing to NPM
+- [Ashutosh Chaudhary](http://github.com/codeasashu)
 
-We recommend using [np](https://github.com/sindresorhus/np).
+## References
+
+- [Swaggymnia](https://github.com/mlabouardy/swaggymnia) 
+- [Insomnia](https://insomnia.rest/)
