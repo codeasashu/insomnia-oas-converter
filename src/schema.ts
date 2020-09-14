@@ -5,12 +5,12 @@ import SpecExporter from './exporter';
 
 class SchemaPack {
   config = {
-    title: 'My Api',
-    description: 'Very cool api',
+    title: 'Api',
+    description: '',
     version: '1.0.0',
-    baseUrl: 'http://myoperator.co',
+    baseUrl: 'http://example.tld',
   };
-  input = '';
+
   validated = false;
   validationResult = {};
 
@@ -24,30 +24,16 @@ class SchemaPack {
     resources: <types.InsomniaResource[]>[],
   };
 
-  constructor(input: string, config: any) {
-    this.input = input;
+  constructor(json: types.InsomniaExport, config: any) {
+    this.json = json;
     this.config = this.getConfig(config);
     this.validated = false;
     this.validationResult = {};
-
-    this.validate();
   }
 
   getConfig(config: any): types.InsomniaConfig {
     config = Object.assign({}, config || {});
     return { ...this.config, ...config };
-  }
-
-  // Validate a insomnia json
-  validate(): void {
-    try {
-      this.json = <types.InsomniaExport>JSON.parse(this.input);
-    } catch (e) {
-      this.validationResult = {
-        result: false,
-        reason: e,
-      };
-    }
   }
 
   getInsomniaResources(): types.InsomniaResource[] {
