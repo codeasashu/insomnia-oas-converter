@@ -50,7 +50,7 @@ let spec = schema.convert();
 let spec_in_yaml = spec.as_yaml()
 
 // Convert to json
-let spec_in_yaml = spec.as_json()
+let spec_in_json = spec.as_json()
 
 // Or you can simply get the spec is javascript object
 let spec_dict = spec.as_dict()
