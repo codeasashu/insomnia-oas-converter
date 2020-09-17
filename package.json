@@ -1,8 +1,23 @@
 {
-  "version": "1.0.1",
-  "license": "MIT",
+  "name": "insomnia-openapi-converter",
+  "version": "1.0.2",
+  "description": "Utility to convert insomnia documents to OpenAPI 3.0 specification.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "homepage": "https://github.com/codeasashu/insomnia-openapi-converter#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codeasashu/insomnia-openapi-converter"
+  },
+  "keywords": [
+    "openapi3",
+    "insomnia",
+    "ts",
+    "typescript"
+  ],
+  "author": "Ashutosh Chaudhary",
+  "module": "dist/insomnia-openapi-converter.esm.js",
+  "license": "MIT",
   "files": [
     "dist",
     "src"
@@ -15,7 +30,10 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "prepare": "tsdx build"
+    "lint:fix": "tsdx lint --fix",
+    "prepare": "tsdx build",
+    "jest": "jest",
+    "jest:watch": "jest --watch"
   },
   "peerDependencies": {},
   "husky": {
@@ -23,17 +41,28 @@
       "pre-commit": "tsdx lint"
     }
   },
+  "jest": {
+    "testMatch": [
+      "**/*.test.js?(x)"
+    ],
+    "verbose": false,
+    "resetMocks": true,
+    "resetModules": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "prettier": {
     "printWidth": 80,
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "insomnia-openapi-converter",
-  "author": "Ashutosh Chaudhary",
-  "module": "dist/insomnia-openapi-converter.esm.js",
   "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
     "husky": "^4.2.5",
+    "jest": "^24.9.0",
     "prettier": "2.1.1",
     "tsdx": "^0.13.3",
     "tslib": "^2.0.1",

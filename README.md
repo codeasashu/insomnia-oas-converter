@@ -22,7 +22,7 @@ npm i insomnia-openapi-converter
 Once installed, you can access to converter in your javascript
 
 ```js
-var converter = require('insomnia-openapi-converter');
+var SchemaConventer = require('insomnia-openapi-converter');
 
 // Your openapi spec config
 let openapiConfig = {
@@ -43,7 +43,7 @@ let insomniaExportedInput = {
     ]
 }
 
-let schema = new converter.SchemaPack(insomniaExportedInput, openapiConfig)
+let schema = new SchemaConventer(insomniaExportedInput, openapiConfig)
 let spec = schema.convert();
 
 // Convert to yaml
@@ -56,9 +56,9 @@ let spec_in_json = spec.as_json()
 let spec_dict = spec.as_dict()
 ```
 
-## SchemaPack
+## SchemaConventer
 
-SchemaPack is responsible for handling the insomnia input and perform some
+SchemaConventer is responsible for handling the insomnia input and perform some
 validations on it. It also exposes a `convert` method, after the validations
 has ran.
 

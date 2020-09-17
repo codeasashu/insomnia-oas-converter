@@ -3,7 +3,7 @@ import OpenapiCollector from './collector';
 import * as utils from './utils';
 import SpecExporter from './exporter';
 
-class SchemaPack {
+class SchemaConventer {
   config = {
     title: 'Api',
     description: '',
@@ -103,4 +103,4 @@ class SchemaPack {
   }
 }
 
-export default SchemaPack;
+export default SchemaConventer;

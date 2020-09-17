@@ -12,8 +12,17 @@ class SpecExporter {
     return yaml.dump(this.as_dict());
   }
 
-  as_json(): string {
-    return this.spec.getSpecAsJson();
+  as_json(formatted: Boolean): string {
+    const specjson = this.spec.getSpecAsJson();
+    if (formatted === true) {
+      try {
+        return JSON.stringify(JSON.parse(specjson), null, 2);
+      } catch (error) {
+        console.warn('[JSON parseerror]', error);
+        return specjson;
+      }
+    }
+    return specjson;
   }
 
   as_dict(): OpenAPIObject {
