@@ -195,7 +195,7 @@ var SpecExporter = /*#__PURE__*/function () {
       try {
         return JSON.stringify(JSON.parse(specjson), null, 2);
       } catch (error) {
-        console.warn('[JSONss parseerror]', error);
+        console.warn('[JSON parseerror]', error);
         return specjson;
       }
     }
@@ -534,8 +534,8 @@ var OpenapiCollector = /*#__PURE__*/function () {
   return OpenapiCollector;
 }();
 
-var SchemaPack = /*#__PURE__*/function () {
-  function SchemaPack(json, config) {
+var SchemaConventer = /*#__PURE__*/function () {
+  function SchemaConventer(json, config) {
     this.config = {
       title: 'Api',
       description: '',
@@ -557,7 +557,7 @@ var SchemaPack = /*#__PURE__*/function () {
     this.validationResult = {};
   }
 
-  var _proto = SchemaPack.prototype;
+  var _proto = SchemaConventer.prototype;
 
   _proto.getConfig = function getConfig(config) {
     config = Object.assign({}, config || {});
@@ -627,8 +627,8 @@ var SchemaPack = /*#__PURE__*/function () {
     return this.collector.get_spec();
   };
 
-  return SchemaPack;
+  return SchemaConventer;
 }();
 
-export default SchemaPack;
+export default SchemaConventer;
 //# sourceMappingURL=insomnia-openapi-converter.esm.js.map

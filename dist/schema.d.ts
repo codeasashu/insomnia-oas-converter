@@ -1,7 +1,7 @@
 import * as types from './types/insomnia';
 import OpenapiCollector from './collector';
 import SpecExporter from './exporter';
-declare class SchemaPack {
+declare class SchemaConventer {
     config: {
         title: string;
         description: string;
@@ -24,4 +24,4 @@ declare class SchemaPack {
     sortInsomniaResources(resources: types.InsomniaResource[]): types.InsomniaResource[];
     convert(): SpecExporter | null;
 }
-export default SchemaPack;
+export default SchemaConventer;

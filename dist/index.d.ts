@@ -1,2 +1,2 @@
-import SchemaPack from './schema';
-export default SchemaPack;
+import SchemaConventer from './schema';
+export default SchemaConventer;
