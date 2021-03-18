@@ -1,6 +1,6 @@
 {
   "name": "insomnia-openapi-converter",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Utility to convert insomnia documents to OpenAPI 3.0 specification.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
