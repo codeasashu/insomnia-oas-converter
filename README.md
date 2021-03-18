@@ -1,6 +1,6 @@
-# Insomnia Openapi Converter
+# Insomnia OAS Converter
 
-This project converts [insomnia](https://insomnia.rest/) to openapi specification (3.0.0).
+This project converts [insomnia](https://insomnia.rest/) to [openapi specification](https://github.com/OAI/OpenAPI-Specification) (3.0.0).
 This package is an effort of improving the another package [Swaggymnia](https://github.com/mlabouardy/swaggymnia) 
 
 so that I can use couple of extra features such as:
