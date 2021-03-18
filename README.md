@@ -16,13 +16,13 @@ it is nice to have the converter in Javascript itself (you can use this as a plu
 Install this project using npm
 
 ```
-npm i insomnia-openapi-converter
+npm i insomnia-oas-converter
 ```
 
 Once installed, you can access to converter in your javascript
 
 ```js
-var SchemaConventer = require('insomnia-openapi-converter');
+var SchemaConventer = require('insomnia-oas-converter');
 
 // Your openapi spec config
 let openapiConfig = {
