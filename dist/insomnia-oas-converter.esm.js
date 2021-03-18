@@ -1,8 +1,4 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var oas = require('openapi3-ts');
+import { OpenApiBuilder, getPath } from 'openapi3-ts';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -221,7 +217,7 @@ var insoRequestIdKey = 'x-request-id';
 var OpenapiCollector = /*#__PURE__*/function () {
   function OpenapiCollector() {
     this.envVars = {};
-    this.builder = new oas.OpenApiBuilder();
+    this.builder = new OpenApiBuilder();
   }
 
   var _proto = OpenapiCollector.prototype;
@@ -235,7 +231,7 @@ var OpenapiCollector = /*#__PURE__*/function () {
   };
 
   _proto.getRequestFromOas = function getRequestFromOas(path, method) {
-    var oasPath = oas.getPath(this.builder.rootDoc.paths, path);
+    var oasPath = getPath(this.builder.rootDoc.paths, path);
     return oasPath && oasPath[method] || null;
   };
 
@@ -634,5 +630,5 @@ var SchemaConventer = /*#__PURE__*/function () {
   return SchemaConventer;
 }();
 
-exports.default = SchemaConventer;
-//# sourceMappingURL=insomnia-openapi-converter.cjs.development.js.map
+export default SchemaConventer;
+//# sourceMappingURL=insomnia-oas-converter.esm.js.map
