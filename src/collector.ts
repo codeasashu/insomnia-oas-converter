@@ -103,7 +103,7 @@ class OpenapiCollector {
     }
 
     // Add the responses
-    let responses = this.get_responses(request.examples);
+    let responses = this.get_responses(request.examples || []);
     pathItem[methodName].responses = responses;
 
     this.builder.addPath(pathInfo.path, pathItem);
@@ -112,7 +112,9 @@ class OpenapiCollector {
     return this;
   }
 
-  get_responses(examples: insomnia.ResponseExample[]): oas.ResponsesObject {
+  get_responses(
+    examples: insomnia.ResponseExample[] = []
+  ): oas.ResponsesObject {
     let oasResponsesBody = <oas.ResponsesObject>{};
     let oasResponseBody = { content: <oas.ResponseObject>{} };
 
@@ -231,7 +233,10 @@ class OpenapiCollector {
     return null;
   }
 
-  add_url(url: string): this {
+  add_url(url: string | undefined): this {
+    if (!url) {
+      return this;
+    }
     if (utils.hasHttp(url) === false) {
       return this;
     }

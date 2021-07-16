@@ -312,7 +312,7 @@ var OpenapiCollector = /*#__PURE__*/function () {
     } // Add the responses
 
 
-    var responses = this.get_responses(request.examples);
+    var responses = this.get_responses(request.examples || []);
     pathItem[methodName].responses = responses;
     this.builder.addPath(pathInfo.path, pathItem); // Add request body
 
@@ -320,6 +320,10 @@ var OpenapiCollector = /*#__PURE__*/function () {
   };
 
   _proto.get_responses = function get_responses(examples) {
+    if (examples === void 0) {
+      examples = [];
+    }
+
     var oasResponsesBody = {};
     var oasResponseBody = {
       content: {}
@@ -425,6 +429,10 @@ var OpenapiCollector = /*#__PURE__*/function () {
   };
 
   _proto.add_url = function add_url(url) {
+    if (!url) {
+      return this;
+    }
+
     if (hasHttp(url) === false) {
       return this;
     }
@@ -543,8 +551,7 @@ var SchemaConventer = /*#__PURE__*/function () {
     this.config = {
       title: 'Api',
       description: '',
-      version: '1.0.0',
-      baseUrl: 'http://example.tld'
+      version: '1.0.0'
     };
     this.validated = false;
     this.validationResult = {};
@@ -619,6 +626,7 @@ var SchemaConventer = /*#__PURE__*/function () {
         try {
           this.collector.addRequest(resource);
         } catch (e) {
+          console.error(resource._id, e);
           this.validationResult = {
             result: false,
             reason: e

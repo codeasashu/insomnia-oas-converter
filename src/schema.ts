@@ -8,7 +8,6 @@ class SchemaConventer {
     title: 'Api',
     description: '',
     version: '1.0.0',
-    baseUrl: 'http://example.tld',
   };
 
   validated = false;
@@ -90,6 +89,7 @@ class SchemaConventer {
         try {
           this.collector.addRequest(<types.InsomniaRequest>resource);
         } catch (e) {
+          console.error(resource._id, e);
           this.validationResult = {
             result: false,
             reason: e,
