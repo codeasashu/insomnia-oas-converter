@@ -6,7 +6,6 @@ declare class SchemaConventer {
         title: string;
         description: string;
         version: string;
-        baseUrl: string;
     };
     validated: boolean;
     validationResult: {};

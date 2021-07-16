@@ -68,5 +68,5 @@ export declare type InsomniaConfig = {
     title: string;
     description: string;
     version: string;
-    baseUrl: string;
+    baseUrl?: string;
 };

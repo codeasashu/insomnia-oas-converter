@@ -15,11 +15,11 @@ declare class OpenapiCollector {
         params: oas.ParameterObject[];
     };
     addRequest(request: insomnia.InsomniaRequest): this;
-    get_responses(examples: insomnia.ResponseExample[]): oas.ResponsesObject;
+    get_responses(examples?: insomnia.ResponseExample[]): oas.ResponsesObject;
     get_request_body(requestBody: any): oas.RequestBodyObject;
     get_query_params(request: insomnia.InsomniaRequest): oas.ParameterObject[];
     _get_from_env(key: any): any;
-    add_url(url: string): this;
+    add_url(url: string | undefined): this;
     _get_oas_pathparams(uri: string): {
         path: string;
         params: oas.ParameterObject[];
